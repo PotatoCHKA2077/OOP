@@ -4,10 +4,17 @@ import java.util.Arrays;
 
 
 public class Main {
+    /**
+     * Класс "Куча" для сортировки кучей путем складывания элементов в кучу.
+      */
     public static class Heap {
         private int[] buffer;
         public int size;
 
+        /**
+         * Метод для инициализации кучи.
+         * @param arr массив
+         */
         public Heap(int[] arr) {
             size = 0;
             buffer = new int[arr.length];
@@ -16,6 +23,10 @@ public class Main {
             }
         }
 
+        /**
+         * Метод для просеивания элемента вверх кучи.
+         * @param index индекс элемента
+         */
         public void shiftUp(int index) {
             while (index > 0) {
                 int currIdx = index;
@@ -31,6 +42,10 @@ public class Main {
             }
         }
 
+        /**
+         * Метод для просеивания элемента вниз кучи.
+         * @param index индекс элемента
+         */
         public void shiftDown(int index) {
             while (2 * index + 1 < size) {
                 int left = 2 * index + 1;
@@ -52,11 +67,19 @@ public class Main {
             }
         }
 
+        /**
+         * Метод для добавления элемента в кучу.
+         * @param val значение элемента
+         */
         public void insert(int val) {
             buffer[size++] = val;
             shiftUp(size - 1);
         }
 
+        /**
+         * Метод достающий минимальный элемент из кучи.
+         * @return минимальный элемент кучи
+         */
         public int extractMin() {
             if (size == 0) {
                 throw new IllegalStateException("Heap is empty");
@@ -70,6 +93,10 @@ public class Main {
         }
     }
 
+    /**
+     * Функция сортировки массива кучей.
+     * @param arr массив
+     */
     public static void heapsort(int[] arr) {
         Heap h = new Heap(arr);
         for (int i = 0; i < arr.length; i++) {
