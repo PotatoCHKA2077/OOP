@@ -2,7 +2,9 @@ package ru.nsu.kruzhaev;
 
 import java.util.Arrays;
 
-
+/**
+ * Класс Main
+ */
 public class Main {
     /**
      * Класс "Куча" для сортировки кучей путем складывания элементов в кучу.
@@ -13,6 +15,7 @@ public class Main {
 
         /**
          * Метод для инициализации кучи.
+         *
          * @param arr массив
          */
         public Heap(int[] arr) {
@@ -25,6 +28,7 @@ public class Main {
 
         /**
          * Метод для просеивания элемента вверх кучи.
+         *
          * @param index индекс элемента
          */
         public void shiftUp(int index) {
@@ -44,6 +48,7 @@ public class Main {
 
         /**
          * Метод для просеивания элемента вниз кучи.
+         *
          * @param index индекс элемента
          */
         public void shiftDown(int index) {
@@ -69,6 +74,7 @@ public class Main {
 
         /**
          * Метод для добавления элемента в кучу.
+         *
          * @param val значение элемента
          */
         public void insert(int val) {
@@ -78,6 +84,7 @@ public class Main {
 
         /**
          * Метод достающий минимальный элемент из кучи.
+         *
          * @return минимальный элемент кучи
          */
         public int extractMin() {
@@ -95,6 +102,7 @@ public class Main {
 
     /**
      * Функция сортировки массива кучей.
+     *
      * @param arr массив
      */
     public static void heapsort(int[] arr) {
