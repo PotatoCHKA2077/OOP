@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class Main {
     public static class Heap {
-        private static int[] buffer;
-        public static int size;
+        private int[] buffer;
+        public int size;
 
         public Heap(int[] arr){
             size = 0;
@@ -37,7 +37,7 @@ public class Main {
                 int right = 2 * index + 2;
                 int min = left;
 
-                if (right < size && buffer[right] < buffer[left]){
+                if (right < size && buffer[right] < buffer[left]) {
                     min = right;
                 }
 
@@ -52,12 +52,15 @@ public class Main {
             }
         }
 
-        public void insert(int val){
+        public void insert(int val) {
             buffer[size++] = val;
             shiftUp(size - 1);
         }
 
         public int extractMin() {
+            if (size == 0) {
+                throw new IllegalStateException("Heap is empty");
+            }
             int res = buffer[0];
             buffer[0] = buffer[--size];
             if (size > 0) {
@@ -74,8 +77,9 @@ public class Main {
         }
     }
 
-    static void main() {
+    public static void main() {
         int[] arr = new int[] {5, 4, 8, 3, 2, 6};
+        heapsort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
