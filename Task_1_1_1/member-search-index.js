@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ru.nsu.kruzhaev","c":"Main","l":"Main()","u":"%3Cinit%3E()"},{"p":"ru.nsu.kruzhaev","c":"Main","l":"sum(int, int)","u":"sum(int,int)"}];updateSearchResults();
