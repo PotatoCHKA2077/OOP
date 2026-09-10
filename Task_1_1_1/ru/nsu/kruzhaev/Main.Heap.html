@@ -80,6 +80,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">Main.Heap</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс "Куча" для сортировки кучей путем складывания элементов в кучу.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,7 +108,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int%5B%5D)" class="member-name-link">Heap</a><wbr>(int[]&nbsp;arr)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Метод для инициализации кучи.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,16 +127,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#extractMin()" class="member-name-link">extractMin</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод достающий минимальный элемент из кучи.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#insert(int)" class="member-name-link">insert</a><wbr>(int&nbsp;val)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод для добавления элемента в кучу.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shiftDown(int)" class="member-name-link">shiftDown</a><wbr>(int&nbsp;index)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод для просеивания элемента вниз кучи.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shiftUp(int)" class="member-name-link">shiftUp</a><wbr>(int&nbsp;index)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод для просеивания элемента вверх кучи.</div>
+</div>
 </div>
 </div>
 </div>
@@ -169,6 +180,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int[])">
 <h3>Heap</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Heap</span><wbr><span class="parameters">(int[]&nbsp;arr)</span></div>
+<div class="block">Метод для инициализации кучи.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arr</code> - массив</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -183,24 +199,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="shiftUp(int)">
 <h3>shiftUp</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">shiftUp</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
+<div class="block">Метод для просеивания элемента вверх кучи.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>index</code> - индекс элемента</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="shiftDown(int)">
 <h3>shiftDown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">shiftDown</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
+<div class="block">Метод для просеивания элемента вниз кучи.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>index</code> - индекс элемента</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="insert(int)">
 <h3>insert</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">insert</span><wbr><span class="parameters">(int&nbsp;val)</span></div>
+<div class="block">Метод для добавления элемента в кучу.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>val</code> - значение элемента</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="extractMin()">
 <h3>extractMin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">extractMin</span>()</div>
+<div class="block">Метод достающий минимальный элемент из кучи.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>минимальный элемент кучи</dd>
+</dl>
 </section>
 </li>
 </ul>
