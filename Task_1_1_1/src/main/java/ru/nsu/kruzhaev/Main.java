@@ -8,7 +8,7 @@ public class Main {
         private int[] buffer;
         public int size;
 
-        public Heap(int[] arr){
+        public Heap(int[] arr) {
             size = 0;
             buffer = new int[arr.length];
             for (int elem : arr) {
@@ -77,7 +77,7 @@ public class Main {
         }
     }
 
-    public static void main() {
+    public static void main(String[] args) {
         int[] arr = new int[] {5, 4, 8, 3, 2, 6};
         heapsort(arr);
         System.out.println(Arrays.toString(arr));
