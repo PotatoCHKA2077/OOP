@@ -2,9 +2,7 @@ package ru.nsu.kruzhaev;
 
 import java.util.Arrays;
 
-/**
- * Класс Main
- */
+
 public class Main {
     /**
      * Класс "Куча" для сортировки кучей путем складывания элементов в кучу.
@@ -112,6 +110,11 @@ public class Main {
         }
     }
 
+    /**
+     * Функция входа в программу
+     *
+     * @param args Параметры переданные при запуске
+     */
     public static void main(String[] args) {
         int[] arr = new int[] {5, 4, 8, 3, 2, 6};
         heapsort(arr);
