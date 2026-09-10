@@ -17,53 +17,53 @@ public class Main {
         }
 
         public void shiftUp(int index) {
-                while (index > 0) {
-                    int curr_idx = index;
-                    int parent_idx = (index - 1) / 2;
-                    if (buffer[curr_idx] < buffer[parent_idx]) {
-                        int t = buffer[curr_idx];
-                        buffer[curr_idx] = buffer[parent_idx];
-                        buffer[parent_idx] = t;
-                        index = parent_idx;
-                    } else {
-                        break;
-                    }
+            while (index > 0) {
+                int currIdx = index;
+                int parentIdx = (index - 1) / 2;
+                if (buffer[currIdx] < buffer[parentIdx]) {
+                    int t = buffer[currIdx];
+                    buffer[currIdx] = buffer[parentIdx];
+                    buffer[parentIdx] = t;
+                    index = parentIdx;
+                } else {
+                    break;
                 }
+            }
         }
 
         public void shiftDown(int index) {
-                while (2 * index + 1 < size) {
-                    int left = 2 * index + 1;
-                    int right = 2 * index + 2;
-                    int min = left;
+            while (2 * index + 1 < size) {
+                int left = 2 * index + 1;
+                int right = 2 * index + 2;
+                int min = left;
 
-                    if (right < size && buffer[right] < buffer[left]){
-                        min = right;
-                    }
-
-                    if (buffer[index] > buffer[min]) {
-                        int t = buffer[index];
-                        buffer[index] = buffer[min];
-                        buffer[min] = t;
-                        index = min;
-                    } else {
-                        break;
-                    }
+                if (right < size && buffer[right] < buffer[left]){
+                    min = right;
                 }
+
+                if (buffer[index] > buffer[min]) {
+                    int t = buffer[index];
+                    buffer[index] = buffer[min];
+                    buffer[min] = t;
+                    index = min;
+                } else {
+                    break;
+                }
+            }
         }
 
         public void insert(int val){
-                buffer[size++] = val;
-                shiftUp(size - 1);
+            buffer[size++] = val;
+            shiftUp(size - 1);
         }
 
         public int extractMin() {
-                int res = buffer[0];
-                buffer[0] = buffer[--size];
-                if (size > 0) {
-                    shiftDown(0);
-                }
-                return res;
+            int res = buffer[0];
+            buffer[0] = buffer[--size];
+            if (size > 0) {
+                shiftDown(0);
+            }
+            return res;
         }
     }
 
