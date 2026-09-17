@@ -1,17 +1,18 @@
 package ru.nsu.kruzhaev;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class HeapTest {
-    static Stream<int[]> argsProvideMethod(){
+    static Stream<int[]> argsProvideMethod() {
         return Stream.of(
                 new int[] {},
                 new int[] {1},
@@ -33,7 +34,7 @@ class HeapTest {
 
         Arrays.sort(arr);
 
-        for(int elem: arr){
+        for (int elem : arr) {
             assertEquals(elem, heap.extractMin());
         }
     }

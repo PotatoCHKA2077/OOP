@@ -3,7 +3,7 @@ package ru.nsu.kruzhaev;
 import java.util.Arrays;
 
 /**
- * Класс Main
+ * Класс Main.
  */
 public class Main {
     /**

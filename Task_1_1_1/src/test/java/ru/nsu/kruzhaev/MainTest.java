@@ -6,14 +6,14 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 
 class MainTest {
-    static Stream<int[]> argsProvideMethod(){
+    static Stream<int[]> argsProvideMethod() {
         return Stream.of(
                 new int[] {},
                 new int[] {1},
