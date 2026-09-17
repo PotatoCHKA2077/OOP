@@ -2,25 +2,29 @@
 
 set -e
 
-SRC_DIR="src"
 OUT_DIR="out"
 DOCS_DIR="docs"
 ARTIFACT="app.jar"
 MAIN_CLASS="ru.nsu.kruzhaev.Main"
+PACKAGE_PATH="src/main/java/ru/nsu/kruzhaev"
+OUT_PACKAGE="out/ru/nsu/kruzhaev"
 
 echo "Removing old files..."
 rm -rf "$OUT_DIR" "$DOCS_DIR" "$ARTIFACT"
 mkdir "$OUT_DIR"
 
+echo "---------"
 echo "Compiling files..."
-javac -d "$OUT_DIR" "$(find "$SRC_DIR" -name "Main.java")"
+javac -d "$OUT_DIR" "$PACKAGE_PATH"/*.java
 
+echo "---------"
 echo "Creating JAR-archive..."
-jar --create --file "$ARTIFACT" --main-class "$MAIN_CLASS" -C "$OUT_DIR" .
+jar cvfe "$ARTIFACT" "$MAIN_CLASS" -C "$OUT_DIR" .
 
+echo "---------"
 echo "Making docs..."
-mkdir "$DOCS_DIR"
-javadoc -d "$DOCS_DIR" "$SRC_DIR/main/java/ru/nsu/kruzhaev/Main.java"
+javadoc -d "$DOCS_DIR" "$PACKAGE_PATH"/*.java
 
+echo "---------"
 echo "Starting..."
 java -jar "$ARTIFACT"
