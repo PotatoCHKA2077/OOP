@@ -12,6 +12,9 @@ public class Main {
      * @param arr массив.
      */
     public static void heapsort(int[] arr) {
+        if (arr == null) {
+            throw new NullPointerException();
+        }
         Heap h = new Heap(arr);
         for (int i = 0; i < arr.length; i++) {
             arr[i] = h.extractMin();

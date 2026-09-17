@@ -1,6 +1,7 @@
 package ru.nsu.kruzhaev;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -20,10 +21,12 @@ class MainTest {
                 new int[] {1, 2, 3, 4},
                 new int[] {4, 3, 2, 1},
                 new int[] {5, 6, 3, 4, 2, 7, 8, 3, 1, 6},
-                new int[] {4, 5, -2, 6, -100, 324},
+                new int[] {7, 7, 7, 7},
+                new int[] {4, 5, -2, 0, -100, 324},
                 new int[] {-100, 6, -4, 8, 3, 6, -4, 9, -4},
                 new int[] {0, -10, Integer.MIN_VALUE, 5},
-                new int[] {-3, 2, Integer.MAX_VALUE, -100}
+                new int[] {-3, 2, Integer.MAX_VALUE, -100},
+                new int[] {5, -2, Integer.MAX_VALUE, 10, Integer.MIN_VALUE, -13}
         );
     }
 
@@ -51,5 +54,11 @@ class MainTest {
         Main.heapsort(arr);
         Arrays.sort(arrCp);
         assertArrayEquals(arrCp, arr);
+    }
+
+    @Test
+    @DisplayName("Выброс NullPointerException при передаче null в функцию")
+    void testNullArrayThrowsException() {
+        assertThrows(NullPointerException.class, () -> Main.heapsort(null));
     }
 }
