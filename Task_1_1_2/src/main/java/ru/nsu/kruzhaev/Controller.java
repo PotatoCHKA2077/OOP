@@ -37,8 +37,6 @@ public class Controller {
      * Метод, отвечающий за порядок действий и логику раунда: раздача первых карт, обработка условий победы и поражения, отправление информации классу {@code View}.
      */
     private void startRound() {
-        view.printRound(round);
-
         player.getHand().addCard(deck.giveCard());
         dealer.getHand().addCard(deck.giveCard());
         player.getHand().addCard(deck.giveCard());
@@ -47,9 +45,11 @@ public class Controller {
         card.setClose(true);
         dealer.getHand().addCard(card);
 
+        view.printRound(round);
+
 
         if (player.getHand().getPoints() == 21) {
-            view.playerWin(playerWins, dealerWins);
+            view.playerWin(++playerWins, dealerWins);
         } else{
             view.playerMove();
             if (player.getHand().getPoints() > 21) {

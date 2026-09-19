@@ -119,10 +119,10 @@ public class View {
      * Метод, обрабатывающий действия игрока.
      */
     public void playerMove(){
-        System.out.println("\nВаш ход\n-------");
+        System.out.println("Ваш ход\n-------");
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...\n");
+        System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
 
         Card result = player.action(scanner.nextInt(), deck);
         while (result != null && player.getHand().getPoints() <= 21){
@@ -132,7 +132,7 @@ public class View {
 
             printTable();
 
-            System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...\n");
+            System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
             result = player.action(scanner.nextInt(), deck);
         }
         if (player.getHand().getPoints() > 21){
@@ -155,7 +155,7 @@ public class View {
 
             printTable();
         }
-        if (dealer.getHand().getPoints() <= 17) {
+        if (dealer.getHand().getPoints() < 17) {
             Card result = dealer.action(deck);
             while (result != null && dealer.getHand().getPoints() <= 21) {
                 System.out.print("Дилер открывает карту ");
