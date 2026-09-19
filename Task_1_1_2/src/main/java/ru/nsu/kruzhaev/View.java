@@ -12,7 +12,9 @@ public class View {
     private Deck deck;
 
     /**
-     * Конструктор класса {@code View}. Берёт на вход игрока, дилера и колоду участвующие в игре для будущего взаимодействия с ними.
+     * Конструктор класса {@code View}. Берёт на вход игрока, дилера и колоду участвующие в игре
+     * для будущего взаимодействия с ними.
+     *
      * @param player Игрок.
      * @param dealer Дилер.
      * @param deck Колода.
@@ -25,6 +27,7 @@ public class View {
 
     /**
      * Метод, печатающий начало раунда.
+     *
      * @param round Текущий раунд.
      */
     public void printRound(int round) {
@@ -35,6 +38,7 @@ public class View {
 
     /**
      * Метод печатающий карту: её номинал, масть и количество очков.
+     *
      * @param card Карта, которую необходимо распечатать.
      */
     private void printCard(Card card) {
@@ -46,18 +50,19 @@ public class View {
                     case HEARTS -> System.out.print("Червовый ");
                     case SPADES -> System.out.print("Пиковый ");
                     case DIAMONDS -> System.out.print("Бубновый ");
-                    case CLUBS -> System.out.print("Крестовый ");
+                    default -> System.out.print("Крестовый ");
                 }
-                switch (card.getRank()) {
-                    case JACK -> System.out.print("Валет ");
-                    case KING -> System.out.print("Король ");
+                if (card.getRank() == Rank.JACK) {
+                    System.out.print("Валет ");
+                } else {
+                    System.out.print("Король ");
                 }
             } else if (card.getRank() == Rank.QUEEN) {
                 switch (card.getSuit()) {
                     case HEARTS -> System.out.print("Червовая Дама ");
                     case SPADES -> System.out.print("Пиковая Дама ");
                     case DIAMONDS -> System.out.print("Бубновая Дама ");
-                    case CLUBS -> System.out.print("Крестовая Дама ");
+                    default -> System.out.print("Крестовая Дама ");
                 }
             } else {
                 switch (card.getRank()) {
@@ -70,13 +75,13 @@ public class View {
                     case EIGHT -> System.out.print("Восьмёрка ");
                     case NINE -> System.out.print("Девятка ");
                     case TEN -> System.out.print("Десятка ");
-                    case ACE -> System.out.print("Туз ");
+                    default -> System.out.print("Туз ");
                 }
                 switch (card.getSuit()) {
                     case HEARTS -> System.out.print("Червы ");
                     case SPADES -> System.out.print("Пики ");
                     case DIAMONDS -> System.out.print("Буби ");
-                    case CLUBS -> System.out.print("Крести ");
+                    default -> System.out.print("Крести ");
                 }
             }
 
@@ -86,9 +91,10 @@ public class View {
 
     /**
      * Метод, печатающий карты в руке и сумму очков этих карт.
+     *
      * @param hand Рука, которую необходимо распечатать.
      */
-    private void printHand(Hand hand){
+    private void printHand(Hand hand) {
         System.out.print("[");
         List<Card> cards = hand.getCardList();
         for (int i = 0; i < cards.size() - 1; i++) {
@@ -118,7 +124,7 @@ public class View {
     /**
      * Метод, обрабатывающий действия игрока.
      */
-    public void playerMove(){
+    public void playerMove() {
         System.out.println("Ваш ход\n-------");
 
         Scanner scanner = new Scanner(System.in);
@@ -135,7 +141,7 @@ public class View {
             System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
             result = player.action(scanner.nextInt(), deck);
         }
-        if (player.getHand().getPoints() > 21){
+        if (player.getHand().getPoints() > 21) {
             printTable();
         }
     }
@@ -147,7 +153,7 @@ public class View {
         System.out.println("Ход дилера\n-------");
 
         Card lastCard = dealer.getHand().getCardList().getLast();
-        if (lastCard.isClose()){
+        if (lastCard.isClose()) {
             System.out.print("Дилер открывает закрытую карту ");
             lastCard.setClose(false);
             printCard(lastCard);
@@ -177,13 +183,14 @@ public class View {
 
     /**
      * Метод, выводящий уведомление о победе игрока.
+     *
      * @param playerWins Количество побед игрока.
      * @param dealerWins Количество побед дилера.
      */
     private void printScore(int playerWins, int dealerWins) {
         if (playerWins > dealerWins) {
             System.out.println("Счёт " + playerWins + ":" + dealerWins + " в вашу пользу.");
-        } else if (playerWins < dealerWins){
+        } else if (playerWins < dealerWins) {
             System.out.println("Счёт " + dealerWins + ":" + playerWins + " в пользу дилера.");
         } else {
             System.out.println("Счёт " + playerWins + ":" + dealerWins);
@@ -192,6 +199,7 @@ public class View {
 
     /**
      * Метод, выводящий счёт.
+     *
      * @param playerWins Количество побед игрока.
      * @param dealerWins Количество побед дилера.
      */
@@ -202,6 +210,7 @@ public class View {
 
     /**
      * Метод, выводящий уведомление о проигрыше игрока.
+     *
      * @param playerWins Количество побед игрока.
      * @param dealerWins Количество побед дилера.
      */
@@ -212,6 +221,7 @@ public class View {
 
     /**
      * Метод, выводящий уведомление о ничьей.
+     *
      * @param playerWins Количество побед игрока.
      * @param dealerWins Количество побед дилера.
      */

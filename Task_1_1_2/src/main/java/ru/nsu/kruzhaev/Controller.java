@@ -34,7 +34,8 @@ public class Controller {
     }
 
     /**
-     * Метод, отвечающий за порядок действий и логику раунда: раздача первых карт, обработка условий победы и поражения, отправление информации классу {@code View}.
+     * Метод, отвечающий за порядок действий и логику раунда: раздача первых карт, обработка
+     * условий победы и поражения, отправление информации классу {@code View}.
      */
     private void startRound() {
         player.getHand().addCard(deck.giveCard());
@@ -50,7 +51,7 @@ public class Controller {
 
         if (player.getHand().getPoints() == 21) {
             view.playerWin(++playerWins, dealerWins);
-        } else{
+        } else {
             view.playerMove();
             if (player.getHand().getPoints() > 21) {
                 view.playerLosing(playerWins, ++dealerWins);
@@ -69,7 +70,8 @@ public class Controller {
             }
         }
 
-        System.out.println("Введите \"1\" если хотите продолжить, или \"0\" если хотите закончить игру...");
+        System.out.println("Введите \"1\" если хотите продолжить, " +
+                "или \"0\" если хотите закончить игру...");
         Scanner scanner = new Scanner(System.in);
         int numOfDecks = deck.getNumberOfDecks();
         if (scanner.nextInt() == 1) {

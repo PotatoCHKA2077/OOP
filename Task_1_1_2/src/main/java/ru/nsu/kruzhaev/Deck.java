@@ -14,8 +14,10 @@ public class Deck {
     /**
      * Конструктор класса {@code Deck}.
      * Берёт на вход количество стандартных колод из 52 карт и создает общую колоду.
-     * @param numberOfDecks Количество стандартных колод в общей колоде устанавливаемое в начале игры.
-     *                     Обычно используют до четырёх стандартных колод. Чем больше колод тем у игрока меньше шанс обыграть казино.
+     *
+     * @param numberOfDecks Количество стандартных колод в общей колоде устанавливаемое в начале
+     *                      игры. Обычно используют до четырёх стандартных колод. Чем больше колод
+     *                      тем у игрока меньше шанс обыграть казино.
      */
     public Deck(int numberOfDecks) {
         this.numberOfDecks = numberOfDecks;
@@ -25,9 +27,9 @@ public class Deck {
 
         cardList = new ArrayList<>();
 
-        for (int i = 0; i < this.numberOfDecks; i++){
-            for (Suit st : availableSuits){
-                for (Rank rnk : availableRanks){
+        for (int i = 0; i < this.numberOfDecks; i++) {
+            for (Suit st : availableSuits) {
+                for (Rank rnk : availableRanks) {
                     cardList.add(new Card(rnk, st));
                 }
             }
@@ -38,6 +40,7 @@ public class Deck {
 
     /**
      * Метод, который выдает верхнюю карту с колоды.
+     *
      * @return Верхняя карта.
      */
     public Card giveCard() {
@@ -46,14 +49,16 @@ public class Deck {
 
     /**
      * Метод, который возвращает количество стандартных колод в общей колоде.
+     *
      * @return Номинал карты.
      */
-    public int getNumberOfDecks(){
+    public int getNumberOfDecks() {
         return numberOfDecks;
     }
 
     /**
      * Метод, который возвращает количество оставшихся карт в колоде.
+     *
      * @return Номинал карты.
      */
     public int getNumberOfCards() {
