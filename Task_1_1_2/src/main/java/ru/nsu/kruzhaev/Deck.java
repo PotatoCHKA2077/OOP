@@ -2,7 +2,6 @@ package ru.nsu.kruzhaev;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EmptyStackException;
 import java.util.List;
 
 /**

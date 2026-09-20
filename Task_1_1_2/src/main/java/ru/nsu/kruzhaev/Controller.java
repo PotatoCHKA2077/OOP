@@ -24,6 +24,7 @@ public class Controller {
 
     /**
      * Конструктор класса {@code Controller}, предназначенный для удобства при тестировании.
+     *
      * @param scanner Сканер потока ввода.
      */
     public Controller(Scanner scanner) {

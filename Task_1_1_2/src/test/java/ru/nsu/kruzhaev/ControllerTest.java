@@ -2,12 +2,12 @@ package ru.nsu.kruzhaev;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-class ControllerRefactoredTest {
+class ControllerTest {
     @Test
     @DisplayName("Проверка на отсутствие ошибок при запуске игры")
     void testStartGameWithCustomScanner() {

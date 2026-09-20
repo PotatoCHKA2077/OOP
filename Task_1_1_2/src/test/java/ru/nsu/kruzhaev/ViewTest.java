@@ -3,16 +3,15 @@ package ru.nsu.kruzhaev;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class ViewTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -54,10 +53,9 @@ class ViewTest {
     public void testPrintRound() {
         view.printRound(1);
 
-        assertEquals("Раунд 1\n" +
-                "Дилер раздал карты:\n" +
-                "\tВаши карты: [Туз Пики (11), Шестёрка Буби (6)] => 17\n" +
-                "\tКарты дилера: [Восьмёрка Червы (8), <закрытая карта>]",
+        assertEquals("Раунд 1\n" + "Дилер раздал карты:\n"
+                        + "\tВаши карты: [Туз Пики (11), Шестёрка Буби (6)] => 17\n"
+                        + "\tКарты дилера: [Восьмёрка Червы (8), <закрытая карта>]",
                 outputStream.toString().trim());
     }
 
@@ -72,11 +70,10 @@ class ViewTest {
     public void tesPrintDealerMove() {
         view.dealerMove();
 
-        assertEquals("Ход дилера\n" +
-                "-------\n" +
-                "Дилер открывает закрытую карту Десятка Крести (10)\n" +
-                "\tВаши карты: [Туз Пики (11), Шестёрка Буби (6)] => 17\n" +
-                "\tКарты дилера: [Восьмёрка Червы (8), Десятка Крести (10)] => 18",
+        assertEquals("Ход дилера\n" + "-------\n"
+                        + "Дилер открывает закрытую карту Десятка Крести (10)\n"
+                        + "\tВаши карты: [Туз Пики (11), Шестёрка Буби (6)] => 17\n"
+                        + "\tКарты дилера: [Восьмёрка Червы (8), Десятка Крести (10)] => 18",
                 outputStream.toString().trim());
     }
 

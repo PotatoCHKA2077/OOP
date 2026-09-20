@@ -3,7 +3,7 @@ package ru.nsu.kruzhaev;
 /**
  * Класс дилера.
  */
-public class Dealer{
+public class Dealer {
     private Hand hand;
 
     /**
