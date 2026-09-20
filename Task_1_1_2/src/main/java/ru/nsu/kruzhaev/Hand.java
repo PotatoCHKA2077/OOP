@@ -27,6 +27,10 @@ public class Hand {
      * @param card Карта, которую необходимо добавить в руку.
      */
     public void addCard(Card card) {
+        if (card == null) {
+            throw new NullPointerException();
+        }
+
         cardList.add(card);
         if (card.getRank() == Rank.ACE) {
             if (points + 11 <= 21 && elevenPointsAceIndex == -1) {
@@ -35,7 +39,7 @@ public class Hand {
                 card.setPoints(1);
             }
         }
-        points += card.getRank().getPoints();
+        points += card.getPoints();
 
         if (points > 21 && elevenPointsAceIndex != -1) {
             cardList.get(elevenPointsAceIndex).setPoints(1);

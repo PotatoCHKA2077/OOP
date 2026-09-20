@@ -21,9 +21,9 @@ public class Dealer{
      * @return Если дилер берёт карту, то метод вернёт эту карту, а если нет, то {@code null}.
      */
     public Card action(Deck deck) {
-        Card card = deck.giveCard();
-        hand.addCard(card);
         if (hand.getPoints() < 17) {
+            Card card = deck.giveCard();
+            hand.addCard(card);
             return card;
         }
         return null;
