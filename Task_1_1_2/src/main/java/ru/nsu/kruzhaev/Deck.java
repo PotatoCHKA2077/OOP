@@ -21,6 +21,10 @@ public class Deck {
      *                      тем у игрока меньше шанс обыграть казино.
      */
     public Deck(int numberOfDecks) {
+        if (numberOfDecks == 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
         this.numberOfDecks = numberOfDecks;
 
         Suit[] availableSuits = Suit.values();

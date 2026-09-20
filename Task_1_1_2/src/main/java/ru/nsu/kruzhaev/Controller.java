@@ -84,7 +84,8 @@ public class Controller {
 
             round++;
             startRound();
+        } else {
+            System.out.println("Игра окончена...\nСпасибо за игру!");
         }
-        System.out.println("Игра окончена...\nСпасибо за игру!");
     }
 }
