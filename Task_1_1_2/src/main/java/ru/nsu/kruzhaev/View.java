@@ -10,6 +10,7 @@ public class View {
     private Player player;
     private Dealer dealer;
     private Deck deck;
+    private Scanner scanner;
 
     /**
      * Конструктор класса {@code View}. Берёт на вход игрока, дилера и колоду участвующие в игре
@@ -19,10 +20,11 @@ public class View {
      * @param dealer Дилер.
      * @param deck Колода.
      */
-    public View(Player player, Dealer dealer, Deck deck) {
+    public View(Player player, Dealer dealer, Deck deck, Scanner scanner) {
         this.player = player;
         this.dealer = dealer;
         this.deck = deck;
+        this.scanner = scanner;
     }
 
     /**
@@ -127,7 +129,6 @@ public class View {
     public void playerMove() {
         System.out.println("Ваш ход\n-------");
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
 
         Card result = player.action(scanner.nextInt(), deck);

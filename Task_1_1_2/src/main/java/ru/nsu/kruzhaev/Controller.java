@@ -6,6 +6,7 @@ import java.util.Scanner;
  * Класс, отвечающий за всю логику игры: создание игры, раздачу карт, порядок игры и т.д.
  */
 public class Controller {
+    private Scanner scanner;
     private Player player;
     private Dealer dealer;
     private Deck deck;
@@ -15,17 +16,31 @@ public class Controller {
     private int dealerWins;
 
     /**
-     * Конструктор класса {@code Controller}. Создает игрока, дилера, колоду. Начинает игру.
+     * Конструктор класса {@code Controller}.
      */
     public Controller() {
+        this(new Scanner(System.in));
+    }
+
+    /**
+     * Конструктор класса {@code Controller}, предназначенный для удобства при тестировании.
+     * @param scanner Сканер потока ввода.
+     */
+    public Controller(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    /**
+     * Создает игрока, дилера, колоду. Начинает игру.
+     */
+    public void start() {
         System.out.println("Добро пожаловать в Блэкджек!\nВведите количество колод для игры:");
-        Scanner scanner = new Scanner(System.in);
         int numberOfDecks = scanner.nextInt();
 
         player = new Player();
         dealer = new Dealer();
         deck = new Deck(numberOfDecks);
-        view = new View(player, dealer, deck);
+        view = new View(player, dealer, deck, scanner);
         round = 1;
         playerWins = 0;
         dealerWins = 0;
@@ -72,7 +87,6 @@ public class Controller {
 
         System.out.println("Введите \"1\" если хотите продолжить, "
                 + "или \"0\" если хотите закончить игру...");
-        Scanner scanner = new Scanner(System.in);
         int numOfDecks = deck.getNumberOfDecks();
         if (scanner.nextInt() == 1) {
             if (deck.getNumberOfCards() <= numOfDecks * 52 / 3 || numOfDecks == 1) {
