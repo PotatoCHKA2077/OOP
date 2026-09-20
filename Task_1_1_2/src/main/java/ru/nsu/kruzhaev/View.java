@@ -131,7 +131,7 @@ public class View {
         System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
 
         Card result = player.action(scanner.nextInt(), deck);
-        while (result != null && player.getHand().getPoints() <= 21){
+        while (result != null && player.getHand().getPoints() <= 21) {
             System.out.print("Вы открыли карту ");
             printCard(result);
             System.out.print("\n");

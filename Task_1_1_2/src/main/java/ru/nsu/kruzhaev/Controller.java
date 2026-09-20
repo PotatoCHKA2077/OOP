@@ -70,8 +70,8 @@ public class Controller {
             }
         }
 
-        System.out.println("Введите \"1\" если хотите продолжить, " +
-                "или \"0\" если хотите закончить игру...");
+        System.out.println("Введите \"1\" если хотите продолжить, "
+                + "или \"0\" если хотите закончить игру...");
         Scanner scanner = new Scanner(System.in);
         int numOfDecks = deck.getNumberOfDecks();
         if (scanner.nextInt() == 1) {

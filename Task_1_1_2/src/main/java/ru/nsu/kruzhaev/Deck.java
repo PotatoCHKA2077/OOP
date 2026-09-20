@@ -45,7 +45,7 @@ public class Deck {
      * @return Верхняя карта.
      */
     public Card giveCard() {
-        if (cardList.isEmpty()){
+        if (cardList.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
         }
         return cardList.removeLast();
