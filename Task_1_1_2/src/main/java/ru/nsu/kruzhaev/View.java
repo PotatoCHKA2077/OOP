@@ -101,7 +101,7 @@ public class View {
             printCard(cards.get(i));
             System.out.print(", ");
         }
-        Card card = cards.getLast();
+        Card card = cards.get(cards.size() - 1);
         printCard(card);
         System.out.print("]");
         if (!card.isClose()) {
@@ -152,7 +152,8 @@ public class View {
     public void dealerMove() {
         System.out.println("Ход дилера\n-------");
 
-        Card lastCard = dealer.getHand().getCardList().getLast();
+        Card lastCard = dealer.getHand().getCardList().get(
+                dealer.getHand().getCardList().size() - 1);
         if (lastCard.isClose()) {
             System.out.print("Дилер открывает закрытую карту ");
             lastCard.setClose(false);
@@ -173,7 +174,8 @@ public class View {
                 result = dealer.action(deck);
             }
             System.out.print("Дилер открывает карту ");
-            printCard(dealer.getHand().getCardList().getLast());
+            printCard(dealer.getHand().getCardList().get(
+                    dealer.getHand().getCardList().size() - 1));
             System.out.print("\n");
 
             printTable();

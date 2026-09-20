@@ -52,7 +52,7 @@ public class Deck {
         if (cardList.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return cardList.removeLast();
+        return cardList.remove(cardList.size() - 1);
     }
 
     /**

@@ -7,7 +7,7 @@ public class Main {
     /**
      * Функция {@code main}. Создает новый объект класса {@code Controller} для запуска игры.
      */
-    static void main() {
+    public static void main(String[] args) {
         Controller game = new Controller();
     }
 }
