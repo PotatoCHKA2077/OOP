@@ -1,6 +1,5 @@
 package ru.nsu.kruzhaev;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
@@ -60,18 +59,39 @@ class ViewTest {
     }
 
     @Test
-    @DisplayName("Проверка правильного вывода печати хода игрока.")
-    public void testPrintPlayerMove() {
-        assertDoesNotThrow(view::playerMove);
+    @DisplayName("Проверка правильного вывода печати открытия карты игроком.")
+    public void testPrintPlayerOpen() {
+        Card card = new Card(Rank.FIVE, Suit.CLUBS);
+        player.getHand().addCard(card);
+        view.playerOpen(card);
+
+        assertEquals("Вы открыли карту Пятёрка Крести (5)\n"
+                + "\tВаши карты: [Туз Пики (1), Шестёрка Буби (6), Пятёрка Крести (5)] => 12\n"
+                + "\tКарты дилера: [Восьмёрка Червы (8), <закрытая карта>]",
+                outputStream.toString().trim());
     }
 
     @Test
-    @DisplayName("Проверка правильного вывода печати хода дилера.")
-    public void tesPrintDealerMove() {
-        view.dealerMove();
+    @DisplayName("Проверка правильного вывода печати открытия карты дилером.")
+    public void tesPrintDealerOpen() {
+        Card card = new Card(Rank.FIVE, Suit.CLUBS);
+        dealer.getHand().addCard(card);
+        dealer.getHand().getCardList().get(1).setClose(false);
+        view.dealerOpen(card);
 
-        assertEquals("Ход дилера\n" + "-------\n"
-                        + "Дилер открывает закрытую карту Десятка Крести (10)\n"
+        assertEquals("Дилер открывает карту Пятёрка Крести (5)\n"
+                        + "\tВаши карты: [Туз Пики (11), Шестёрка Буби (6)] => 17\n"
+                        + "\tКарты дилера: [Восьмёрка Червы (8), Десятка Крести (10), "
+                        + "Пятёрка Крести (5)] => 23",
+                outputStream.toString().trim());
+    }
+
+    @Test
+    @DisplayName("Проверка правильного вывода печати открытия закрытой карты дилером.")
+    public void tesPrintDealerClosedCardOpen() {
+        view.dealerOpen(dealer.getHand().getCardList().get(1));
+
+        assertEquals("Дилер открывает закрытую карту Десятка Крести (10)\n"
                         + "\tВаши карты: [Туз Пики (11), Шестёрка Буби (6)] => 17\n"
                         + "\tКарты дилера: [Восьмёрка Червы (8), Десятка Крести (10)] => 18",
                 outputStream.toString().trim());
@@ -101,55 +121,5 @@ class ViewTest {
         view.draw(8, 8);
 
         assertEquals("У вас ничья! Счёт 8:8", outputStream.toString().trim());
-    }
-
-    private String stringCard(Card card) {
-        String answer = "";
-        if (card.isClose()) {
-            answer += "<закрытая карта>";
-        } else {
-            if (card.getRank() == Rank.JACK || card.getRank() == Rank.KING) {
-                switch (card.getSuit()) {
-                    case HEARTS -> answer += "Червовый ";
-                    case SPADES -> answer += "Пиковый ";
-                    case DIAMONDS -> answer += "Бубновый ";
-                    default -> answer += "Крестовый ";
-                }
-                if (card.getRank() == Rank.JACK) {
-                    answer += "Валет ";
-                } else {
-                    answer += "Король ";
-                }
-            } else if (card.getRank() == Rank.QUEEN) {
-                switch (card.getSuit()) {
-                    case HEARTS -> answer += "Червовая Дама ";
-                    case SPADES -> answer += "Пиковая Дама ";
-                    case DIAMONDS -> answer += "Бубновая Дама ";
-                    default -> answer += "Крестовая Дама ";
-                }
-            } else {
-                switch (card.getRank()) {
-                    case TWO -> answer += "Двойка ";
-                    case THREE -> answer += "Тройка ";
-                    case FOUR -> answer += "Четвёрка ";
-                    case FIVE -> answer += "Пятёрка ";
-                    case SIX -> answer += "Шестёрка ";
-                    case SEVEN -> answer += "Семёрка ";
-                    case EIGHT -> answer += "Восьмёрка ";
-                    case NINE -> answer += "Девятка ";
-                    case TEN -> answer += "Десятка ";
-                    default -> answer += "Туз ";
-                }
-                switch (card.getSuit()) {
-                    case HEARTS -> answer += "Червы ";
-                    case SPADES -> answer += "Пики ";
-                    case DIAMONDS -> answer += "Буби ";
-                    default -> answer += "Крести ";
-                }
-            }
-
-            answer += "(" + card.getPoints() + ")";
-        }
-        return answer;
     }
 }

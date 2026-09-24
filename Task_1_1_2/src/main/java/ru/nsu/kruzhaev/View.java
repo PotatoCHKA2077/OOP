@@ -126,62 +126,31 @@ public class View {
     /**
      * Метод, обрабатывающий действия игрока.
      */
-    public void playerMove() {
-        System.out.println("Ваш ход\n-------");
-
-        System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
-
-        Card result = player.action(scanner.nextInt(), deck);
-        while (result != null && player.getHand().getPoints() <= 21) {
+    public void playerOpen(Card card) {
+        if (card != null) {
             System.out.print("Вы открыли карту ");
-            printCard(result);
+            printCard(card);
             System.out.print("\n");
-
-            printTable();
-
-            System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
-            result = player.action(scanner.nextInt(), deck);
         }
-        if (player.getHand().getPoints() > 21) {
-            printTable();
-        }
+        printTable();
     }
 
     /**
      * Метод, обрабатывающий действия дилера.
      */
-    public void dealerMove() {
-        System.out.println("Ход дилера\n-------");
-
-        Card lastCard = dealer.getHand().getCardList().get(
-                dealer.getHand().getCardList().size() - 1);
-        if (lastCard.isClose()) {
-            System.out.print("Дилер открывает закрытую карту ");
-            lastCard.setClose(false);
-            printCard(lastCard);
-            System.out.print("\n");
-
-            printTable();
-        }
-        if (dealer.getHand().getPoints() < 17) {
-            Card result = dealer.action(deck);
-            while (result != null && dealer.getHand().getPoints() <= 21) {
+    public void dealerOpen(Card card) {
+        if (card != null) {
+            if (card.isClose()) {
+                card.setClose(false);
+                System.out.print("Дилер открывает закрытую карту ");
+            } else {
                 System.out.print("Дилер открывает карту ");
-                printCard(result);
-                System.out.print("\n");
-
-                printTable();
-
-                result = dealer.action(deck);
             }
-            System.out.print("Дилер открывает карту ");
-            printCard(dealer.getHand().getCardList().get(
-                    dealer.getHand().getCardList().size() - 1));
+            printCard(card);
             System.out.print("\n");
 
-            printTable();
-
         }
+        printTable();
     }
 
     /**
