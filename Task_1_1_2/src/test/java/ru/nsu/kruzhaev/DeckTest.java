@@ -52,6 +52,6 @@ class DeckTest {
     @Test
     @DisplayName("Проверка на создание колоды с нулевым количеством колод.")
     public void testNullSizeDeckInitialization() {
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new Deck(0));
+        assertThrows(NegativeArraySizeException.class, () -> new Deck(0));
     }
 }
