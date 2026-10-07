@@ -1,26 +1,34 @@
 package ru.nsu.kruzhaev;
 
-import java.util.Objects;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * {@code Main} класс.
+ */
 public class Main {
+    /**
+     * Функция запуска {@code main}.
+     */
     static void main() {
-        Expression e = new Add("(3+(2*x))");
-//        ExpressionParser ep = new ExpressionParser("((3-(129/x))+(0*z))");
-//        Expression es = ep.getRes();
-        Expression e2 = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите выражение:");
+        String exp = scanner.nextLine();
 
-        System.out.println(e.equals(e2));
+        Expression e = new ExpressionParser(exp).getRes();
 
+        e.print();
 
-//        int result = e.eval("x=3 ; z =1; y=8");
-//        System.out.println(result);
-//
-//        e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
-//
-//        Expression de = e.derivative("x");
-//        de.print();
+        System.out.println("Введите переменную для взятия производной:");
+        String var = scanner.nextLine();
+
+        Expression de = e.derivative(var);
+        de.print();
+
+        System.out.println("Введите переменные и их значения в формате" +
+                " \"имя1 = значение1; имя2 = значение2;...\" для вычисления выражения:");
+        String vars = scanner.nextLine();
+
+        int result = e.eval(vars);
+        System.out.println(result);
     }
 }

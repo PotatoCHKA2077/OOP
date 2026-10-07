@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,7 +45,7 @@ class VariableTest {
     }
 
     @Test
-    @DisplayName("Проверка выброса исключения при отсутствии нужной переменной в переданной строке.")
+    @DisplayName("Проверка выброса исключения при отсутствии переменной в переданной строке.")
     void testNoNeededVariable() {
         assertThrows(NoSuchElementException.class, () -> variable.eval("f = 3"));
     }

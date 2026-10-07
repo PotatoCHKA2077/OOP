@@ -1,10 +1,18 @@
 package ru.nsu.kruzhaev;
 
+/**
+ * Класс для создания дерева выражения из строки.
+ */
 public class ExpressionParser {
     Expression res;
     String string;
     int index;
 
+    /**
+     * Конструктор класса {@code ExpressionParser}.
+     *
+     * @param string Строка с выражением.
+     */
     public ExpressionParser(String string) {
         isNotEmpty(string);
 
@@ -15,6 +23,11 @@ public class ExpressionParser {
         isEnded();
     }
 
+    /**
+     * Метод, определяющий вид выражения.
+     *
+     * @return Объект выражения.
+     */
     private Expression defineExpression() {
         if (Character.isDigit(string.charAt(index))) {
             return parseNumber();
@@ -27,6 +40,11 @@ public class ExpressionParser {
         }
     }
 
+    /**
+     * Метод, считывающий выражение.
+     *
+     * @return Объект выражения.
+     */
     private Expression parseExpression() {
         Expression left = defineExpression();
         char operand = string.charAt(index++);
@@ -48,6 +66,11 @@ public class ExpressionParser {
         return result;
     }
 
+    /**
+     * Метод, считывающий константу.
+     *
+     * @return Объект константы.
+     */
     private Expression parseNumber() {
         int num = 0;
         for (; index < string.length() && Character.isDigit(string.charAt(index)); index++) {
@@ -57,6 +80,11 @@ public class ExpressionParser {
         return new Number(num);
     }
 
+    /**
+     * Метод, считывающий переменную.
+     *
+     * @return Объект переменной.
+     */
     private Expression parseVariable() {
         StringBuilder str = new StringBuilder();
         for (; index < string.length() && Character.isLetter(string.charAt(index)); index++) {
@@ -65,6 +93,11 @@ public class ExpressionParser {
         return new Variable(str.toString());
     }
 
+    /**
+     * Метод проверки строки на пустоту и {@code null}.
+     *
+     * @param string Строка.
+     */
     private void isNotEmpty(String string) {
         if (string == null) {
             throw new NullPointerException();
@@ -74,12 +107,20 @@ public class ExpressionParser {
         }
     }
 
-    private void isEnded(){
+    /**
+     * Метод, проверяющий, что строка считана до конца.
+     */
+    private void isEnded() {
         if (index < string.length()) {
             throw new IllegalArgumentException("Illegal expression format!");
         }
     }
 
+    /**
+     * Метод, возвращающий считанное выражение.
+     *
+     * @return Считанное выражение.
+     */
     public Expression getRes() {
         return res;
     }

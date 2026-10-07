@@ -3,9 +3,17 @@ package ru.nsu.kruzhaev;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс для парсинга переменных.
+ */
 public class VariablesParser {
     private Map<String, Integer> variables;
 
+    /**
+     * Конструктор класса {@code VariableParser}.
+     *
+     * @param variables Строка с переменными.
+     */
     public VariablesParser(String variables) {
         this.variables = new HashMap<>();
 
@@ -21,6 +29,11 @@ public class VariablesParser {
         }
     }
 
+    /**
+     * Проверка переменной.
+     *
+     * @param var Список, состоящий из имени переменной и её значения.
+     */
     private void checkVar(String[] var) {
         if (var.length <= 1) {
             throw new IllegalArgumentException("Illegal format of variable \"" + var[0]
@@ -40,6 +53,11 @@ public class VariablesParser {
         }
     }
 
+    /**
+     * Метод, возвращающий словарь с переменными и их значениями.
+     *
+     * @return Словарь с переменными и их значениями.
+     */
     public Map<String, Integer> getVariables() {
         return variables;
     }
