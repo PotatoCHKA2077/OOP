@@ -80,6 +80,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Sub</span>
 <span class="extends-implements">extends <a href="BinaryExpression.html" title="class in ru.nsu.kruzhaev">BinaryExpression</a></span></div>
+<div class="block">Класс разницы.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,10 +105,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Sub</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expression)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор класса <code>Sub</code> с передачей строки с разностью.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(ru.nsu.kruzhaev.Expression,ru.nsu.kruzhaev.Expression)" class="member-name-link">Sub</a><wbr>(<a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;left,
  <a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;right)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Конструктор класса <code>Sub</code> с передачей выражений.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,10 +129,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#derivative(java.lang.String)" class="member-name-link">derivative</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;variable)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод взятия производной от переменной.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#eval(java.lang.String)" class="member-name-link">eval</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;variables)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод вычисления разницы.</div>
+</div>
 </div>
 </div>
 </div>
@@ -156,12 +165,23 @@ loadScripts(document, 'script');</script>
 <h3>Sub</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Sub</span><wbr><span class="parameters">(<a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;left,
  <a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;right)</span></div>
+<div class="block">Конструктор класса <code>Sub</code> с передачей выражений.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>left</code> - Левое выражение разницы.</dd>
+<dd><code>right</code> - Правое выражение разницы.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Sub</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Sub</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expression)</span></div>
+<div class="block">Конструктор класса <code>Sub</code> с передачей строки с разностью.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>expression</code> - Строка с разностью.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -176,9 +196,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="derivative(java.lang.String)">
 <h3>derivative</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></span>&nbsp;<span class="element-name">derivative</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;variable)</span></div>
+<div class="block">Метод взятия производной от переменной.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Expression.html#derivative(java.lang.String)">derivative</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>variable</code> - Переменная по которой будет браться производная.</dd>
+<dt>Returns:</dt>
+<dd>Выражение функции производной.</dd>
 </dl>
 </section>
 </li>
@@ -186,9 +211,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="eval(java.lang.String)">
 <h3>eval</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">eval</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;variables)</span></div>
+<div class="block">Метод вычисления разницы.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Expression.html#eval(java.lang.String)">eval</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>variables</code> - Переменные необходимые для вычисления значения выражения.</dd>
+<dt>Returns:</dt>
+<dd>Числовое значение разницы.</dd>
 </dl>
 </section>
 </li>

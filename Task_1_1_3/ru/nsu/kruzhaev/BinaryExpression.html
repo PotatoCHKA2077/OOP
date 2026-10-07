@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">BinaryExpression</span>
 <span class="extends-implements">extends <a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></span></div>
+<div class="block">Абстрактный класс выражения с оператором.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -115,10 +116,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">BinaryExpression</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expression)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор класса <code>BinaryExpression</code> с передачей строки с выражением.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(ru.nsu.kruzhaev.Expression,ru.nsu.kruzhaev.Expression)" class="member-name-link">BinaryExpression</a><wbr>(<a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;left,
  <a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;right)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Конструктор класса <code>BinaryExpression</code> с передачей выражений.</div>
+</div>
 </div>
 </section>
 </li>
@@ -135,10 +140,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLeft()" class="member-name-link">getLeft</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод возвращающий левое выражение.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRight()" class="member-name-link">getRight</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Метод возвращающий правое выражение.</div>
+</div>
 </div>
 </div>
 </div>
@@ -184,12 +193,23 @@ loadScripts(document, 'script');</script>
 <h3>BinaryExpression</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BinaryExpression</span><wbr><span class="parameters">(<a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;left,
  <a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a>&nbsp;right)</span></div>
+<div class="block">Конструктор класса <code>BinaryExpression</code> с передачей выражений.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>left</code> - Левое выражение.</dd>
+<dd><code>right</code> - Правое выражение.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>BinaryExpression</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BinaryExpression</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expression)</span></div>
+<div class="block">Конструктор класса <code>BinaryExpression</code> с передачей строки с выражением.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>expression</code> - Строка с выражением.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -204,12 +224,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getLeft()">
 <h3>getLeft</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></span>&nbsp;<span class="element-name">getLeft</span>()</div>
+<div class="block">Метод возвращающий левое выражение.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Левое выражение.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRight()">
 <h3>getRight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.kruzhaev">Expression</a></span>&nbsp;<span class="element-name">getRight</span>()</div>
+<div class="block">Метод возвращающий правое выражение.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Правое выражение.</dd>
+</dl>
 </section>
 </li>
 </ul>
