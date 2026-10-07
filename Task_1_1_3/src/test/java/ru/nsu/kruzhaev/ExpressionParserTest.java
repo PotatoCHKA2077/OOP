@@ -58,14 +58,14 @@ class ExpressionParserTest {
     @DisplayName("Проверка парсинга произведения")
     void testMulParsing() {
         Expression e = new ExpressionParser("(2*3)").getRes();
-        assertTrue(e.equals(new Add("(2*3)")) && e.getClass() == Mul.class);
+        assertTrue(e.equals(new Mul("(2*3)")) && e.getClass() == Mul.class);
     }
 
     @Test
     @DisplayName("Проверка парсинга частного")
     void testDivParsing() {
         Expression e = new ExpressionParser("(2/3)").getRes();
-        assertTrue(e.equals(new Add("(2/3)")) && e.getClass() == Div.class);
+        assertTrue(e.equals(new Div("(2/3)")) && e.getClass() == Div.class);
     }
 
     @Test
