@@ -1,19 +1,51 @@
 package ru.nsu.kruzhaev;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+Класс {@code Main}.
+ */
 public class Main {
+    /**
+     * Метод {@code main}.
+     */
     static void main() {
-//        List<String> vertices = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));
-//        List<Edge> edges = new ArrayList<>(Arrays.asList(
-//                new Edge("A", "D"),
-//                new Edge("B", "D"),
-//                new Edge("C", "B")
-//        ));
+        List<Vertex> vertices = new ArrayList<>(Arrays.asList(
+                new Vertex("A"),
+                new Vertex("B"),
+                new Vertex("C")));
 
-//        Graph graph = new IncidenceMatrixGraph(vertices, edges);
-        // graph.readFromFile("graph.txt");
+        List<Edge> edges = new ArrayList<>(Arrays.asList(
+                new Edge("A", "B"),
+                new Edge("B", "C"),
+                new Edge("A", "C")
+        ));
+
+        Graph graph = new AdjacencyMatrixGraph(vertices, edges);
+
+        Graph graph1 = new AdjacencyListGraph();
+
+        graph1.addVertex("A");
+        graph1.addVertex("B");
+        graph1.addVertex("C");
+
+        graph1.addEdge("A", "B");
+        graph1.addEdge("A", "C");
+        graph1.addEdge("B", "C");
+
+        Graph graph2 = new IncidenceMatrixGraph("graph.txt");
+
+        System.out.println(graph.toString());
+        System.out.println(graph1.toString());
+        System.out.println(graph2.toString());
+
+        System.out.println(graph1.equals(graph2));
+        System.out.println(graph1.equals(graph));
+        System.out.println(graph.equals(graph2));
+
+        TopologicalSort ts = new KahnSort(graph2);
+        System.out.println(ts.getRes().toString());
     }
 }
