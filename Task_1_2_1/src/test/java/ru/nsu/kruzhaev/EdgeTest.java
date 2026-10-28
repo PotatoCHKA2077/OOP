@@ -1,7 +1,9 @@
 package ru.nsu.kruzhaev;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class EdgeTest {
     @Test
@@ -17,8 +19,8 @@ class EdgeTest {
         Vertex b = new Vertex("B");
         Edge edge = new Edge(a, b);
 
-        assertSame(a, edge.getStart());
-        assertSame(b, edge.getEnd());
+        assertEquals(a, edge.getStart());
+        assertEquals(b, edge.getEnd());
     }
 
     @Test

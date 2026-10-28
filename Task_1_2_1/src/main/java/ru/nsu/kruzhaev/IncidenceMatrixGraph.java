@@ -11,7 +11,7 @@ import java.util.Set;
  * Класс реализации графа при помощи матрицы инцидентности,
  * имплементированный от интерфейса {@code Graph}.
  */
-public class IncidenceMatrixGraph implements Graph{
+public class IncidenceMatrixGraph implements Graph {
     private Map<Vertex, Map<Edge, Integer>> matrix;
     private Set<Edge> edges;
 
@@ -85,8 +85,8 @@ public class IncidenceMatrixGraph implements Graph{
 
         Set<Edge> cpedges = Set.copyOf(edges);
         for (Edge edge : cpedges) {
-            if (Objects.equals(edge.getStart(), vertex) ||
-                    Objects.equals(edge.getEnd(), vertex)) {
+            if (Objects.equals(edge.getStart(), vertex)
+                    || Objects.equals(edge.getEnd(), vertex)) {
                 removeEdge(edge);
             }
         }

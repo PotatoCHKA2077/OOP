@@ -1,15 +1,21 @@
 package ru.nsu.kruzhaev;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class KahnSortTest {
     private Graph makeGraph() {
         Graph graph = new AdjacencyListGraph();
-        for (String name : List.of("A", "B", "C", "D")) graph.addVertex(name);
+
+        for (String name : List.of("A", "B", "C", "D")) {
+            graph.addVertex(name);
+        }
+
         graph.addEdge("A", "B");
         graph.addEdge("A", "C");
         graph.addEdge("B", "D");

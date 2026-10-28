@@ -1,15 +1,21 @@
 package ru.nsu.kruzhaev;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-class DFSSortTest {
+class DfsSortTest {
     private Graph makeGraph() {
         Graph graph = new AdjacencyListGraph();
-        for (String name : List.of("A", "B", "C", "D")) graph.addVertex(name);
+
+        for (String name : List.of("A", "B", "C", "D")) {
+            graph.addVertex(name);
+        }
+
         graph.addEdge("A", "B");
         graph.addEdge("A", "C");
         graph.addEdge("B", "D");
@@ -20,7 +26,7 @@ class DFSSortTest {
     @Test
     void sortsInTopologicalOrderTest() {
         Graph graph = makeGraph();
-        List<Vertex> order = new DFSSort(graph).getRes();
+        List<Vertex> order = new DfsSort(graph).getRes();
 
         assertEquals(graph.getVertices().size(), order.size());
         assertEquals(graph.getVertices(), new HashSet<>(order));
@@ -39,13 +45,13 @@ class DFSSortTest {
         graph.addEdge("B", "C");
         graph.addEdge("C", "B");
 
-        assertThrows(RuntimeException.class, () -> new DFSSort(graph));
+        assertThrows(RuntimeException.class, () -> new DfsSort(graph));
     }
 
     @Test
     void sortsSingleVertexGraphTest() {
         Graph graph = new AdjacencyListGraph();
         graph.addVertex("A");
-        assertEquals(List.of(new Vertex("A")), new DFSSort(graph).getRes());
+        assertEquals(List.of(new Vertex("A")), new DfsSort(graph).getRes());
     }
 }

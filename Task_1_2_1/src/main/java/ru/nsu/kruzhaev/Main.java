@@ -24,6 +24,7 @@ public class Main {
         ));
 
         Graph graph = new AdjacencyMatrixGraph(vertices, edges);
+        System.out.println(graph.toString());
 
         Graph graph1 = new AdjacencyListGraph();
 
@@ -35,10 +36,9 @@ public class Main {
         graph1.addEdge("A", "C");
         graph1.addEdge("B", "C");
 
-        Graph graph2 = new IncidenceMatrixGraph("graph.txt");
-
-        System.out.println(graph.toString());
         System.out.println(graph1.toString());
+
+        Graph graph2 = new IncidenceMatrixGraph("graph.txt");
         System.out.println(graph2.toString());
 
         System.out.println(graph1.equals(graph2));

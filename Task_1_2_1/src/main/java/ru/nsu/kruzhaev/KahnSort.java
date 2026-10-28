@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Класс реализующий топологическую сортировку при помощи алгоритма Кана.
  */
-public class KahnSort implements TopologicalSort{
+public class KahnSort implements TopologicalSort {
     private List<Vertex> res;
     private Queue<Vertex> queue;
     private Set<Vertex> vertices;

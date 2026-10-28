@@ -11,7 +11,7 @@ import java.util.Set;
  * Класс реализации графа при помощи списков смежности,
  * имплементированный от интерфейса {@code Graph}.
  */
-public class AdjacencyListGraph implements Graph{
+public class AdjacencyListGraph implements Graph {
     private Map<Vertex, Set<Vertex>> verticesList;
 
     /**
@@ -175,8 +175,8 @@ public class AdjacencyListGraph implements Graph{
      * @return {@code true}, если вершина есть в графе, {@code false}, если нет.
      */
     public boolean hasEdge(Edge edge) {
-        return verticesList.containsKey(edge.getStart()) &&
-                verticesList.get(edge.getStart()).contains(edge.getEnd());
+        return verticesList.containsKey(edge.getStart())
+                && verticesList.get(edge.getStart()).contains(edge.getEnd());
     }
 
     /**

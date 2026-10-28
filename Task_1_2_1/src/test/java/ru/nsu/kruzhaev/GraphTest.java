@@ -1,14 +1,18 @@
 package ru.nsu.kruzhaev;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.api.Test;
 
 class GraphTest {
     @TempDir Path tempDir;
@@ -59,7 +63,8 @@ class GraphTest {
             graph.removeEdge("A", "B");
             assertFalse(graph.hasEdge("A", "B"));
             assertEquals(Set.of(new Edge("A", "C")), graph.getEdges());
-            assertThrows(IllegalArgumentException.class, () -> graph.removeEdge(new Edge("A", "B")));
+            assertThrows(IllegalArgumentException.class,
+                    () -> graph.removeEdge(new Edge("A", "B")));
         }
     }
 
