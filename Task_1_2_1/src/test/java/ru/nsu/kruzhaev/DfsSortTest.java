@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -53,5 +54,21 @@ class DfsSortTest {
         Graph graph = new AdjacencyListGraph();
         graph.addVertex("A");
         assertEquals(List.of(new Vertex("A")), new DfsSort(graph).getRes());
+    }
+
+    @Test
+    void sortsGraphWithTwoZeroParentsVerticesTest() {
+        Graph graph = new AdjacencyListGraph();
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addEdge("A", "C");
+        graph.addEdge("B", "C");
+
+        assertEquals(new ArrayList<>(List.of(
+                new Vertex("A"),
+                new Vertex("B"),
+                new Vertex("C"))),
+                new DfsSort(graph).getRes());
     }
 }

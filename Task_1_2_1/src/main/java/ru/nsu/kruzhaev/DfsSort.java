@@ -1,10 +1,6 @@
 package ru.nsu.kruzhaev;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Класс реализующий топологическую сортировку при помощи алгоритма поиска в глубину.
@@ -17,6 +13,7 @@ public class DfsSort implements TopologicalSort {
     private List<Vertex> res;
     private final Set<Vertex> vertices;
     private Map<Vertex, Integer> verticesColors;
+    private Stack<Vertex> zeroParents;
 
     /**
      * Конструктор класса {@code DFSSort}.
@@ -27,6 +24,7 @@ public class DfsSort implements TopologicalSort {
         res = new ArrayList<>();
         verticesColors = new HashMap<>();
         vertices = graph.getVertices();
+        zeroParents = new Stack<>();
 
         sort();
     }
@@ -35,20 +33,23 @@ public class DfsSort implements TopologicalSort {
      * Сортирующий метод.
      */
     private void sort() {
-        Vertex vrtx = null;
         for (Vertex v : vertices) {
             if (v.getParents().isEmpty()) {
-                vrtx = v;
+                zeroParents.add(v);
             }
 
             verticesColors.put(v, white);
         }
 
-        if (vrtx == null) {
+        if (zeroParents.isEmpty()) {
             throw new RuntimeException("Что-то пошло не так!");
         }
 
-        coloring(vrtx);
+        zeroParents.sort(Comparator.comparing(Vertex::getName));
+        int s = zeroParents.size();
+        for (int i = 0; i < s; i++) {
+            coloring(zeroParents.pop());
+        }
 
         res = res.reversed();
     }

@@ -45,7 +45,7 @@ public class Main {
         System.out.println(graph1.equals(graph));
         System.out.println(graph.equals(graph2));
 
-        TopologicalSort ts = new KahnSort(graph2);
+        TopologicalSort ts = new DfsSort(graph2);
         System.out.println(ts.getRes().toString());
     }
 }
