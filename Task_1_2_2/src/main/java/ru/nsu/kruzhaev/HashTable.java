@@ -2,7 +2,7 @@ package ru.nsu.kruzhaev;
 
 import java.util.Iterator;
 
-public class HashTable<K, V>  implements Iterable<HashNode<K, V>>{
+public class HashTable<K, V>  implements Iterable<HashNode<K, V>> {
 
     private HashNode<K, V>[] table;
     private int size;
@@ -26,7 +26,7 @@ public class HashTable<K, V>  implements Iterable<HashNode<K, V>>{
         return res;
     }
 
-    private HashNode<K, V> findPrevious(K key) { // думаю переделать на просто поиск, а не предыдущего, но потом
+    private HashNode<K, V> findNode(K key) {
         if (key == null) {
             throw new NullPointerException();
         }
@@ -35,123 +35,193 @@ public class HashTable<K, V>  implements Iterable<HashNode<K, V>>{
 
         HashNode<K, V> node = table[index];
 
-        if (node == null) {
-            return null;
-        }
-
-        while (node.next != null) {
-            if (node.next.key.equals(key)) {
+        while (node != null) {
+            if (node.getKey().equals(key)) {
                 return node;
             }
 
-            node = node.next;
+            node = node.getNext();
         }
 
-        return node;
+        return null;
     }
 
     private void checkLoading() {
         if ((float) size / capacity > LOAD_FACTOR) {
-            HashNode<K, V>[] cpTable = table.clone();
+            HashNode<K, V>[] cpTable = table;
 
             capacity *= 2;
             table = new HashNode[capacity];
 
-            for (HashNode<K, V> node : this) {
-                put(node.key, node.value);
+            for (HashNode<K, V> node : cpTable) {
+                while (node != null) {
+                    put(node.getKey(), node.getValue());
+                    size--;
+                    modCount--;
+                    node = node.getNext();
+                }
             }
         }
     }
 
     public V put(K key, V value) {
-        HashNode<K, V> node = findPrevious(key);
-
-        if (node == null) {
-            node = new HashNode<>(key, value);
-            table[hash(key)] = node;
-            size++;
-            modCount++;
-            checkLoading();
-        } else if (node.next != null) {
-            node = node.next;
-            V old = node.value;
-            node.value = value;
-            modCount++;
-            return old;
-        } else if (node.key.equals(key)) {
-            V old = node.value;
-            node.value = value;
-            modCount++;
-            return old;
-        } else {
-            node.next = new HashNode<>(key, value);
-            size++;
-            modCount++;
-            checkLoading();
+        if (key == null) {
+            throw new NullPointerException();
         }
+
+        int index = hash(key);
+        HashNode<K, V> node = table[index];
+
+        while (node != null) {
+            if (node.getKey().equals(key)) {
+                V old = node.getValue();
+                node.setValue(value);
+                return old;
+            }
+
+            node = node.getNext();
+        }
+
+        node = new HashNode<>(key, value);
+        node.setNext(table[index]);
+        table[index] = node;
+        size++;
+        modCount++;
+        checkLoading();
         return null;
     }
 
     public boolean remove(K key, V value) {
-        HashNode<K, V> node = findPrevious(key);
+        if (key == null) {
+            throw new NullPointerException();
+        }
 
-        if (node != null) {
-            if (node.key.equals(key) && node.value.equals(value)) {
-                table[hash(key)] = node.next;
+        int index = hash(key);
+        HashNode<K, V> node = table[index];
+
+        if (node == null) {
+            return false;
+        }
+
+        if (node.getKey().equals(key) && node.getValue().equals(value)) {
+            table[index] = node.getNext();
+            size--;
+            modCount++;
+            return true;
+        }
+
+        while (node.getNext() != null) {
+            HashNode<K, V> next = node.getNext();
+            if (next.getKey().equals(key) && next.getValue().equals(value)) {
+                node.setNext(next.getNext());
                 size--;
                 modCount++;
                 return true;
-            } else {
-                node = node.next;
-                if (node != null && node.key.equals(key) && node.value.equals(value)) {
-                    if (node.next != null) {
-                        node.next = node.next.next;
-                    }
-                    size--;
-                    modCount++;
-                    return true;
-                }
             }
+            node = next;
         }
 
         return false;
     }
 
     public V get(K key) {
-        HashNode<K, V> node = findPrevious(key);
+        HashNode<K, V> node = findNode(key);
 
-        if (node == null) {
-            return null;
-        } else if (node.key.equals(key)) {
-            return node.value;
-        } else if (node.next.key.equals(key)) {
-            return node.next.value;
+        if (node != null) {
+            return node.getValue();
         }
         return null;
     }
 
     public boolean containsKey(K key) {
-        HashNode<K, V> node = findPrevious(key);
-
-        if (node == null) {
-            return false;
-        } else if (node.key.equals(key)) {
-            return true;
-        } else {
-            return node.next.key.equals(key);
-        }
+        return findNode(key) != null;
     }
 
     public int getSize() {
         return size;
     }
 
+    public int getModCount(){
+        return modCount;
+    }
+
     public HashNode<K, V>[] getTable() {
         return table;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 
     @Override
     public Iterator<HashNode<K, V>> iterator() {
         return new HashTableIterator<>(this);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{");
+        boolean first = true;
+
+        for (HashNode<K, V> node : table) {
+            while (node != null) {
+                if (!first) {
+                    stringBuilder.append(", ");
+                }
+
+                first = false;
+                stringBuilder.append(node.toString());
+                node = node.getNext();
+            }
+        }
+
+        stringBuilder.append("}");
+
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int res = 0;
+
+        for (HashNode<K, V> node : table) {
+            while (node != null) {
+                res += node.hashCode();
+                node = node.getNext();
+            }
+        }
+
+        return res;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HashTable)) {
+            return false;
+        }
+
+        HashTable<K, V> t = (HashTable<K, V>) o;
+
+        if (size != t.getSize() || hashCode() != o.hashCode()) {
+            return false;
+        }
+
+        for (HashNode<K, V> n : table) {
+            while (n != null) {
+                if (!t.containsKey(n.getKey())) {
+                    return false;
+                }
+                if (t.get(n.getKey()) != n.getValue()) {
+                    return false;
+                }
+                n = n.getNext();
+            }
+        }
+
+        return true;
     }
 }

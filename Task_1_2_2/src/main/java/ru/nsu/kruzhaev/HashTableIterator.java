@@ -1,5 +1,6 @@
 package ru.nsu.kruzhaev;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -8,16 +9,25 @@ public class HashTableIterator<K, V> implements Iterator<HashNode<K, V>> {
     int nodeIteratedNum;
     int currentHash;
     HashNode<K, V> currentNode;
+    int expectedModCount;
 
     public HashTableIterator(HashTable<K, V> table) {
         this.table = table;
         nodeIteratedNum = 0;
         currentHash = 0;
         currentNode = null;
+        expectedModCount = table.getModCount();
     }
 
     @Override
     public boolean hasNext() {
+        if (table.getModCount() != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
+
+        if (currentNode != null && currentNode.getNext() != null) {
+            return true;
+        }
         return nodeIteratedNum < table.getSize();
     }
 
@@ -27,13 +37,24 @@ public class HashTableIterator<K, V> implements Iterator<HashNode<K, V>> {
             throw new NoSuchElementException("В хеш таблице больше нет элементов!");
         }
 
-        if (currentNode != null) {
-            currentNode = currentNode.next;
-        }
-        while (currentNode == null) {
-            currentNode = table.getTable()[++currentHash];
+        if (currentNode != null && currentNode.getNext() != null) {
+            currentNode = currentNode.getNext();
+            nodeIteratedNum++;
+            return currentNode;
         }
 
+        if (currentNode != null) {
+            currentHash++;
+        }
+
+        while (table.getTable()[currentHash] == null) {
+            currentHash++;
+            if (currentHash >= table.getCapacity()) {
+                throw new NoSuchElementException();
+            }
+        }
+
+        currentNode = table.getTable()[currentHash];
         nodeIteratedNum++;
         return currentNode;
     }

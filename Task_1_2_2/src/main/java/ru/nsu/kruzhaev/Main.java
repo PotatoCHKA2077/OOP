@@ -1,31 +1,18 @@
 package ru.nsu.kruzhaev;
 
-import java.util.HashMap;
-import java.util.Map;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * Клас Main.
+ */
 public class Main {
+    /**
+     * Функция main.
+     */
     static void main() {
-        HashTable<String, Integer> htable = new HashTable<>();
-        System.out.println(htable.put("aboba", 15));
+        HashTable<Integer, String> htable = new HashTable<>();
 
-        System.out.println(htable.put("oao", 128));
+        htable.put(-3, "aboba");
+        htable.put(150, "jdjdjd");
 
-        System.out.println(htable.put("qwertyui", 12345678));
-
-        System.out.println(htable.put("qwertyui", 156));
-
-        System.out.println(htable.get("qwertyui"));
-
-        System.out.println(htable.containsKey("qwertyui"));
-
-        System.out.println(htable.remove("qwertyui", 156));
-
-        System.out.println(htable.containsKey("qwertyui"));
-
-        for (HashNode<String, Integer> node : htable) {
-            System.out.println("Key: " + node.key + ", value: " + node.value);
-        }
+        System.out.println(htable.toString());
     }
 }
