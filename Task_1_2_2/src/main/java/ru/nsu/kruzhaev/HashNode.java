@@ -56,7 +56,7 @@ public class HashNode<K, V> {
     /**
      * Метод изменяет значение узла.
      *
-     * @value новое значение узла.
+     * @param value новое значение узла.
      */
     public void setValue(V value) {
         this.value = value;
@@ -64,8 +64,7 @@ public class HashNode<K, V> {
 
     /**
      * Метод изменяет следующий узел.
-     *
-     * @value новый следующий узел.
+     * @param next новый следующий узел.
      */
     public void setNext(HashNode<K, V> next) {
         this.next = next;
