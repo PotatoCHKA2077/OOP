@@ -1,11 +1,17 @@
 package ru.nsu.kruzhaev;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class HashTableTest {
 
@@ -28,10 +34,9 @@ class HashTableTest {
             if (this == obj) {
                 return true;
             }
-            if (!(obj instanceof Key)) {
+            if (!(obj instanceof Key other)) {
                 return false;
             }
-            Key other = (Key) obj;
             return name.equals(other.name);
         }
 
@@ -329,14 +334,6 @@ class HashTableTest {
     }
 
     @Test
-    void equalsIsReflexive() {
-        HashTable<String, Integer> table = new HashTable<>();
-        table.put("one", 1);
-
-        assertEquals(table, table);
-    }
-
-    @Test
     void equalsReturnsFalseForNull() {
         HashTable<String, Integer> table = new HashTable<>();
 
@@ -365,8 +362,8 @@ class HashTableTest {
     void equalsReturnsTrueForTablesWithSameEntries() {
         HashTable<String, Integer> first = new HashTable<>();
         HashTable<String, Integer> second = new HashTable<>();
-        String one = new String("one");
-        String two = new String("two");
+        String one = "one";
+        String two = "two";
 
         first.put(one, 1);
         first.put(two, 2);

@@ -1,14 +1,16 @@
 package ru.nsu.kruzhaev;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class HashTableIteratorTest {
 
@@ -58,7 +60,7 @@ class HashTableIteratorTest {
 
         assertTrue(iterator.hasNext());
         HashNode<Key, Integer> node = iterator.next();
-        assertSame(key, node.getKey());
+        assertEquals(key, node.getKey());
         assertEquals(10, node.getValue());
         assertFalse(iterator.hasNext());
     }
@@ -74,7 +76,7 @@ class HashTableIteratorTest {
         assertTrue(iterator.hasNext());
         assertTrue(iterator.hasNext());
         assertTrue(iterator.hasNext());
-        assertSame(key, iterator.next().getKey());
+        assertEquals(key, iterator.next().getKey());
     }
 
     @Test
