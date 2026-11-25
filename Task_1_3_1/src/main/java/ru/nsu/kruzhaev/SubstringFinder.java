@@ -14,8 +14,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KMPMatcher {
-    private final int[] pattern;
+/**
+ * Класс поиска подстроки.
+ */
+public class SubstringFinder {
+    private final int[] substring;
     private final int[] prefixFunction;
     private int j;
     private long position;
@@ -25,24 +28,35 @@ public class KMPMatcher {
     private ByteBuffer byteBuffer;
     private CharBuffer charBuffer;
 
-    public KMPMatcher(String pattern) {
-        if (pattern.isEmpty()) {
+    /**
+     * Конструктор каласса.
+     *
+     * @param substring подстрока.
+     */
+    public SubstringFinder(String substring) {
+        if (substring.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
-        this.pattern = pattern.codePoints().toArray();
-        prefixFunction = buildPrefixFunction(this.pattern);
+        this.substring = substring.codePoints().toArray();
+        prefixFunction = buildPrefixFunction(this.substring);
 
     }
 
-    private int[] buildPrefixFunction(int[] pattern) {
-        int[] pi = new int[pattern.length];
-        for (int i = 1; i < pattern.length; i++) {
+    /**
+     * Метод, вычисляющий префикс-функцию подстроки.
+     *
+     * @param substring подстрока.
+     * @return массив-результат префикс-функции.
+     */
+    private int[] buildPrefixFunction(int[] substring) {
+        int[] pi = new int[substring.length];
+        for (int i = 1; i < substring.length; i++) {
             int j = pi[i - 1];
-            while (j > 0 && pattern[i] != pattern[j]) {
+            while (j > 0 && substring[i] != substring[j]) {
                 j = pi[j - 1];
             }
-            if (pattern[i] == pattern[j]) {
+            if (substring[i] == substring[j]) {
                 ++j;
             }
             pi[i] = j;
@@ -50,12 +64,19 @@ public class KMPMatcher {
         return pi;
     }
 
+    /**
+     * Метод поиска подстроки в файле.
+     *
+     * @param path путь до файла.
+     * @return список индексов начала каждого вхождения.
+     * @throws IOException исключение ввода-вывода.
+     */
     public List<Long> find(Path path) throws IOException {
         j = 0;
         position = 0;
         result = new ArrayList<>();
 
-        try (FileChannel ch = FileChannel.open(path, StandardOpenOption.READ)){
+        try (FileChannel ch = FileChannel.open(path, StandardOpenOption.READ)) {
             channel = ch;
             decoder = StandardCharsets.UTF_8.newDecoder().onMalformedInput(
                     CodingErrorAction.REPORT
@@ -71,6 +92,11 @@ public class KMPMatcher {
         return new ArrayList<>(result);
     }
 
+    /**
+     * Метод, декодирующий байты в символы.
+     *
+     * @throws IOException исключение ввода-вывода.
+     */
     private void decoding() throws IOException {
         boolean endOfInput = false;
 
@@ -117,6 +143,13 @@ public class KMPMatcher {
         } while (flushingResult.isOverflow());
     }
 
+    /**
+     * Метод для обработки буфера.
+     *
+     * @param buffer буфер символов.
+     * @param endOfInput флаг об окончании файла.
+     * @throws CharacterCodingException исключение символьного кода.
+     */
     private void processCharacters(CharBuffer buffer, boolean endOfInput)
             throws CharacterCodingException {
         buffer.flip();
@@ -153,15 +186,20 @@ public class KMPMatcher {
         buffer.compact();
     }
 
+    /**
+     * Метод обработки символа.
+     *
+     * @param codePoint символ в числовом представлении.
+     */
     private void processCodePoint(int codePoint) {
-        while (j > 0 && codePoint != pattern[j]) {
+        while (j > 0 && codePoint != substring[j]) {
             j = prefixFunction[j - 1];
         }
-        if (codePoint == pattern[j]) {
+        if (codePoint == substring[j]) {
             j++;
         }
-        if (j == pattern.length) {
-            result.add(position - pattern.length + 1);
+        if (j == substring.length) {
+            result.add(position - substring.length + 1);
             j = prefixFunction[j - 1];
         }
         position++;

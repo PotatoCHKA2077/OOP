@@ -1,9 +1,7 @@
 package ru.nsu.kruzhaev;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.charset.CharacterCodingException;
@@ -12,9 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class KMPMatcherTest {
     @TempDir
@@ -30,7 +29,7 @@ class KMPMatcherTest {
     void shouldFindSingleOccurrence() throws IOException {
         Path file = createFile("hello world");
 
-        KMPMatcher finder = new KMPMatcher("world");
+        SubstringFinder finder = new SubstringFinder("world");
 
         assertEquals(List.of(6L), finder.find(file));
     }
@@ -48,7 +47,7 @@ class KMPMatcherTest {
     void shouldFindOccurrences(String text, String pattern, String expected) throws IOException {
         Path file = createFile(text);
 
-        KMPMatcher finder = new KMPMatcher(pattern);
+        SubstringFinder finder = new SubstringFinder(pattern);
 
         List<Long> actual = finder.find(file);
 
@@ -62,7 +61,7 @@ class KMPMatcherTest {
     void shouldFindOccurrencesWithSurrogatePairs() throws IOException {
         Path file = createFile("😀a😀a");
 
-        KMPMatcher finder = new KMPMatcher("😀a");
+        SubstringFinder finder = new SubstringFinder("😀a");
 
         assertEquals(List.of(0L, 2L), finder.find(file));
     }
@@ -74,7 +73,7 @@ class KMPMatcherTest {
 
         Files.writeString(secondFile, "aaa", StandardCharsets.UTF_8);
 
-        KMPMatcher finder = new KMPMatcher("aa");
+        SubstringFinder finder = new SubstringFinder("aa");
 
         assertEquals(List.of(0L, 1L, 2L, 3L), finder.find(firstFile));
         assertEquals(List.of(0L, 1L), finder.find(secondFile));
@@ -86,7 +85,7 @@ class KMPMatcherTest {
 
         Path file = createFile(text);
 
-        KMPMatcher finder = new KMPMatcher("XYZ");
+        SubstringFinder finder = new SubstringFinder("XYZ");
 
         assertEquals(List.of(4095L), finder.find(file));
     }
@@ -96,7 +95,7 @@ class KMPMatcherTest {
         String text = "a".repeat(4095) + "😀" + "z";
         Path file = createFile(text);
 
-        KMPMatcher finder = new KMPMatcher("😀");
+        SubstringFinder finder = new SubstringFinder("😀");
 
         assertEquals(List.of(4095L), finder.find(file));
     }
@@ -107,7 +106,7 @@ class KMPMatcherTest {
 
         Files.write(file, new byte[] {(byte) 0xC3, (byte) 0x28});
 
-        KMPMatcher finder = new KMPMatcher("a");
+        SubstringFinder finder = new SubstringFinder("a");
 
         assertThrows(CharacterCodingException.class, () -> finder.find(file));
     }
@@ -118,14 +117,14 @@ class KMPMatcherTest {
 
         Path file = createFile(text);
 
-        KMPMatcher finder = new KMPMatcher("XYZ");
+        SubstringFinder finder = new SubstringFinder("XYZ");
 
         assertEquals(List.of(20_000L, 40_003L), finder.find(file));
     }
 
     @Test
     void shouldThrowExceptionWhenFileDoesNotExist() {
-        KMPMatcher finder = new KMPMatcher("abc");
+        SubstringFinder finder = new SubstringFinder("abc");
 
         assertThrows(IOException.class, () -> finder.find(tempDir.resolve("missing.txt"))
         );
@@ -135,13 +134,13 @@ class KMPMatcherTest {
     void shouldReturnEmptyListForEmptyFile() throws IOException {
         Path file = createFile("");
 
-        KMPMatcher finder = new KMPMatcher("abc");
+        SubstringFinder finder = new SubstringFinder("abc");
 
         assertEquals(List.of(), finder.find(file));
     }
 
     @Test
     void shouldThrowExceptionWhenEmptyPattern() {
-        assertThrows(IllegalArgumentException.class, () -> new KMPMatcher(""));
+        assertThrows(IllegalArgumentException.class, () -> new SubstringFinder(""));
     }
 }
