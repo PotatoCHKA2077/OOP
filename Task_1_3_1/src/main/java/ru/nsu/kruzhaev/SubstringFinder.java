@@ -51,11 +51,13 @@ public class SubstringFinder {
      */
     private int[] buildPrefixFunction(int[] substring) {
         int[] pi = new int[substring.length];
+
         for (int i = 1; i < substring.length; i++) {
             int j = pi[i - 1];
             while (j > 0 && substring[i] != substring[j]) {
                 j = pi[j - 1];
             }
+
             if (substring[i] == substring[j]) {
                 ++j;
             }
@@ -165,18 +167,14 @@ public class SubstringFinder {
                     }
                     buffer.position(buffer.position() - 1);
                     break;
-                }
-                else if (Character.isLowSurrogate(buffer.get(buffer.position()))) {
+                } else if (Character.isLowSurrogate(buffer.get(buffer.position()))) {
                     s = Character.toCodePoint(symb, buffer.get());
-                }
-                else {
+                } else {
                     throw new CharacterCodingException();
                 }
-            }
-            else if (Character.isLowSurrogate(symb)) {
+            } else if (Character.isLowSurrogate(symb)) {
                 throw new CharacterCodingException();
-            }
-            else {
+            } else {
                 s = symb;
             }
 
@@ -195,9 +193,11 @@ public class SubstringFinder {
         while (j > 0 && codePoint != substring[j]) {
             j = prefixFunction[j - 1];
         }
+
         if (codePoint == substring[j]) {
             j++;
         }
+
         if (j == substring.length) {
             result.add(position - substring.length + 1);
             j = prefixFunction[j - 1];

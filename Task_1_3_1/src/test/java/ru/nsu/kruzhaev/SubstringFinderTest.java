@@ -36,13 +36,13 @@ class SubstringFinderTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'hello world', world, 6",
-            "'abcdef', xyz, ''",
-            "'abcabc', abc, 0;3",
-            "'aaaaa', aaa, 0;1;2",
-            "'абракадабра', бра, 1;8",
-            "'abc', abcdef, ''",
-            "'', abc, ''"
+        "'hello world', world, 6",
+        "'abcdef', xyz, ''",
+        "'abcabc', abc, 0;3",
+        "'aaaaa', aaa, 0;1;2",
+        "'абракадабра', бра, 1;8",
+        "'abc', abcdef, ''",
+        "'', abc, ''"
     })
     void shouldFindOccurrences(String text, String pattern, String expected) throws IOException {
         Path file = createFile(text);
