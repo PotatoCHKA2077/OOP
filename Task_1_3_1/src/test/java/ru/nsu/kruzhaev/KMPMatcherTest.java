@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class KMPMatcherTest {
     @TempDir
@@ -87,5 +89,59 @@ class KMPMatcherTest {
         KMPMatcher finder = new KMPMatcher("XYZ");
 
         assertEquals(List.of(4095L), finder.find(file));
+    }
+
+    @Test
+    void shouldDecodeUtf8CharacterAcrossByteBufferBoundary() throws IOException {
+        String text = "a".repeat(4095) + "😀" + "z";
+        Path file = createFile(text);
+
+        KMPMatcher finder = new KMPMatcher("😀");
+
+        assertEquals(List.of(4095L), finder.find(file));
+    }
+
+    @Test
+    void shouldThrowExceptionForMalformedUtf8() throws IOException {
+        Path file = tempDir.resolve("malformed.txt");
+
+        Files.write(file, new byte[] {(byte) 0xC3, (byte) 0x28});
+
+        KMPMatcher finder = new KMPMatcher("a");
+
+        assertThrows(CharacterCodingException.class, () -> finder.find(file));
+    }
+
+    @Test
+    void shouldProcessFileLargerThanBuffers() throws IOException {
+        String text = "a".repeat(20_000) + "XYZ" + "b".repeat(20_000) + "XYZ";
+
+        Path file = createFile(text);
+
+        KMPMatcher finder = new KMPMatcher("XYZ");
+
+        assertEquals(List.of(20_000L, 40_003L), finder.find(file));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenFileDoesNotExist() {
+        KMPMatcher finder = new KMPMatcher("abc");
+
+        assertThrows(IOException.class, () -> finder.find(tempDir.resolve("missing.txt"))
+        );
+    }
+
+    @Test
+    void shouldReturnEmptyListForEmptyFile() throws IOException {
+        Path file = createFile("");
+
+        KMPMatcher finder = new KMPMatcher("abc");
+
+        assertEquals(List.of(), finder.find(file));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenEmptyPattern() {
+        assertThrows(IllegalArgumentException.class, () -> new KMPMatcher(""));
     }
 }

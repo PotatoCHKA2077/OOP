@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.*;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CoderResult;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -113,7 +117,8 @@ public class KMPMatcher {
         } while (flushingResult.isOverflow());
     }
 
-    private void processCharacters(CharBuffer buffer, boolean endOfInput) throws CharacterCodingException {
+    private void processCharacters(CharBuffer buffer, boolean endOfInput)
+            throws CharacterCodingException {
         buffer.flip();
 
         while (buffer.hasRemaining()) {
@@ -148,26 +153,6 @@ public class KMPMatcher {
         buffer.compact();
     }
 
-//    public List<Long> find(String text) {
-//        int[] pointedText = text.codePoints().toArray();
-//        int j = 0;
-//
-//        for (int i = 0; i < pointedText.length; i++) {
-//            while (j > 0 && pointedText[i] != pattern[j]) {
-//                j = prefixFunction[j - 1];
-//            }
-//            if (pointedText[i] == pattern[j]) {
-//                j++;
-//            }
-//            if (j == pattern.length) {
-//                result.add((long) i - pattern.length + 1);
-//                j = prefixFunction[j - 1];
-//            }
-//        }
-//
-//        return result;
-//    }
-
     private void processCodePoint(int codePoint) {
         while (j > 0 && codePoint != pattern[j]) {
             j = prefixFunction[j - 1];
@@ -180,9 +165,5 @@ public class KMPMatcher {
             j = prefixFunction[j - 1];
         }
         position++;
-    }
-
-    public int[] getPrefixFunction() {
-        return prefixFunction;
     }
 }
