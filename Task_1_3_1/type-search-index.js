@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"ru.nsu.kruzhaev","l":"KMPMatcher"},{"p":"ru.nsu.kruzhaev","l":"Main"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"ru.nsu.kruzhaev","l":"Main"},{"p":"ru.nsu.kruzhaev","l":"SubstringFinder"}];updateSearchResults();
